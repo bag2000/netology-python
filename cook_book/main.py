@@ -10,7 +10,6 @@ class CookBook:
 
             cook_book = {}
 
-
             for line in file:
                 recipe_name = line.strip()
                 ingredient_count = int(file.readline().strip())
@@ -49,8 +48,8 @@ class CookBook:
                         'measure': measure,
                         'quantity': quantity * person_count
                     }
-        pprint(ingredients_to_buy)
+        return ingredients_to_buy
 
 cook_book = CookBook('recipes.txt')
-#pprint(cook_book.read_book(), width=100, indent=2, sort_dicts=False)
-cook_book.get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2)
+pprint(cook_book.read_book(), width=100, indent=2, sort_dicts=False)
+pprint(cook_book.get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 2), width=100, indent=2, sort_dicts=False)
