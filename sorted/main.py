@@ -45,4 +45,6 @@ class SortFiles:
 
 
 sorting = SortFiles(['1.txt', '2.txt', '3.txt'])
+
+# Файл с именем 4.txt создается в каталоге запуска main.py
 sorting.write_file()
