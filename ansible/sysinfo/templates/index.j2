@@ -1,0 +1,4 @@
+RAM: {{ ansible_memtotal_mb }} Mb <br>
+HDD: {{ (ansible_mounts[0]['size_total'] / 1024 / 1024 / 1024) | round(2) }} Gb <br>
+CPU: {{ ansible_processor[2] }} *** avaible cores: {{ ansible_processor_cores }} <br>
+IP: {{ ansible_default_ipv4.address }}

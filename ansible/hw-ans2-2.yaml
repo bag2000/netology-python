@@ -1,0 +1,41 @@
+---
+- name: Change welcome msg
+  become: true
+  hosts: all
+  vars:
+    text: 'My text 2000'
+  tasks:
+
+    - name: Change file permissions (disable old message)
+      ansible.builtin.file:
+        path: /etc/update-motd.d/
+        mode: u-x,g-x,o-x
+        recurse: true
+
+    - name: Delete file with message if exist
+      ignore_errors: true
+      ansible.builtin.file:
+        state: absent
+        path: /etc/update-motd.d/99-my-msg
+
+    - name: Touch script file
+      ansible.builtin.file:
+        path: /etc/update-motd.d/99-my-msg
+        state: touch
+        mode: '0755'
+        owner: root
+
+    - name: Add sh text
+      ansible.builtin.lineinfile:
+        path: /etc/update-motd.d/99-my-msg
+        line: '#!/bin/sh'
+
+    - name: Add hostname text
+      ansible.builtin.lineinfile:
+        path: /etc/update-motd.d/99-my-msg
+        line: 'echo Hostname: {{ ansible_hostname }}'
+
+    - name: Add ip text
+      ansible.builtin.lineinfile:
+        path: /etc/update-motd.d/99-my-msg
+        line: 'echo IP: {{ ansible_default_ipv4.address }}'

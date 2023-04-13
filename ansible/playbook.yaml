@@ -1,0 +1,6 @@
+---
+- name: Sysinfo on Apache
+  become: true
+  hosts: all
+  roles:
+    - sysinfo

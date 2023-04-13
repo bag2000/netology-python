@@ -1,0 +1,17 @@
+---
+- name: Download kafka
+  become: no
+  hosts: all
+  tasks:
+    - name: Create a directory for unpack
+      ansible.builtin.file:
+        path: /tmp/download_test
+        state: directory
+        mode: '0766'
+
+    - name: Download kafka package and unarchive
+      ansible.builtin.unarchive:
+        src: https://downloads.apache.org/kafka/3.4.0/kafka-3.4.0-src.tgz
+        dest: /tmp/download_test/
+        mode: '0766'
+        remote_src: yes
